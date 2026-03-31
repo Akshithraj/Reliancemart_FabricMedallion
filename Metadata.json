@@ -1,0 +1,22 @@
+import requests
+import json
+
+repo = "<repo>"
+folder = "Structured_data"
+user = "<username>"
+api_url = f"https://api.github.com/repos/{user}/{repo}/contents/{folder}"
+
+response = requests.get(api_url)
+files = response.json()
+
+metadata = []
+for f in files:
+    if f['name'].endswith('.csv'):
+        metadata.append({
+            "source_url": f['path'],  # relative path
+            "sink_folder": f"RelianceMart_Bronze_{f['name'].split('.')[0]}",
+            "sink_file": f"RelianceMart_{f['name']}"
+        })
+
+with open('metadata.json', 'w') as outfile:
+    json.dump(metadata, outfile, indent=2)
