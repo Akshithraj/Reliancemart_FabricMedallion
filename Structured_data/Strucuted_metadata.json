@@ -1,0 +1,19 @@
+[
+    {
+        "source_url" : "refs/heads/main/Structured_data/Orders_Data.csv",
+        "sink_folder" : "RelianceMart_Bronze_Orders",
+        "sink_file" : "RelianceMart_orders.csv"
+    },
+    {
+         "source_url" : "refs/heads/main/Structured_data/customers.csv",
+        "sink_folder" : "RelianceMart_Bronze_Customers",
+        "sink_file" : "RelianceMart_customers.csv"
+
+    },
+    {
+        "source_url" : "refs/heads/main/Structured_data/products.csv",
+        "sink_folder" : "RelianceMart_Bronze_Products",
+        "sink_file" : "RelianceMart_products.csv"
+
+    }
+]
