@@ -1,0 +1,19 @@
+[
+    {
+        "source_url" : "refs/heads/main/RelianceMart_UnstructuredData/reviews.json",
+        "sink_folder" : "RelianceMart_Bronze_Reviews",
+        "sink_file" : "RelianceMart_review.json"
+    },
+    {
+         "source_url" : "refs/heads/main/elianceMart_UnstructuredData/socialmedia.json",
+        "sink_folder" : "RelianceMart_Bronze_Social_Media",
+        "sink_file" : "RelianceMart_social_media.json"
+
+    },
+    {
+        "source_url" : "refs/heads/main/RelianceMart_UnstructuredData/web_logs.json",
+        "sink_folder" : "RelianceMart_Bronze_Web_Logs",
+        "sink_file" : "RelianceMart_web_logs.json"
+
+    }
+]
