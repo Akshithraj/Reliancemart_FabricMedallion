@@ -1,0 +1,101 @@
+table reliancemart_gold_web_logs
+	lineageTag: e0cef82d-d1c9-416f-8a51-bcd89c14f337
+	sourceLineageTag: [dbo].[reliancemart_gold_web_logs]
+
+	measure 'Total Visits' = SUM(reliancemart_gold_web_logs[count])
+		formatString: 0
+		lineageTag: dc2b290f-8482-46c4-af2c-04bf990e770b
+
+		changedProperty = Name
+
+	measure 'Conversion Rate' =
+			
+			DIVIDE(
+			    DISTINCTCOUNT(reliancemart_gold_orders[OrderID]),
+			    DISTINCTCOUNT(reliancemart_gold_web_logs[user_id])
+			)
+		lineageTag: 88bfbfcc-8b87-427c-b980-3a80d8a450f3
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Engagement Score' =
+			
+			DIVIDE(
+			    SUM(reliancemart_gold_web_logs[count]) +
+			    SUM(reliancemart_gold_social_media[count]),
+			    DISTINCTCOUNT(reliancemart_gold_web_logs[user_id])
+			)
+		lineageTag: 888ad146-0906-457d-b970-9e727b4070c8
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Page Views' =
+			
+			CALCULATE(
+			    SUM(reliancemart_gold_web_logs[count]),
+			    reliancemart_gold_web_logs[action] = "view"
+			)
+		formatString: 0
+		lineageTag: 6c772cc6-1474-46db-beb5-a0cc6a344f81
+
+		changedProperty = Name
+
+	measure Clicks =
+			
+			CALCULATE(
+			    SUM(reliancemart_gold_web_logs[count]),
+			    reliancemart_gold_web_logs[action] = "click"
+			)
+		formatString: 0
+		lineageTag: 415b4d70-aa5d-4674-bf91-032f6d6bd09e
+
+		changedProperty = Name
+
+	column user_id
+		dataType: string
+		lineageTag: c5240783-8c07-4910-9071-688a6c7dc361
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column page
+		dataType: string
+		lineageTag: 5449058b-27cd-46cf-8d3d-50ca68a95e1b
+		sourceLineageTag: page
+		summarizeBy: none
+		sourceColumn: page
+
+		annotation SummarizationSetBy = Automatic
+
+	column action
+		dataType: string
+		lineageTag: 500178a0-309e-46f2-bc6d-41e9530f066c
+		sourceLineageTag: action
+		summarizeBy: none
+		sourceColumn: action
+
+		annotation SummarizationSetBy = Automatic
+
+	column count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0192e9a2-75eb-4d28-9fc4-da18a551c42c
+		sourceLineageTag: count
+		summarizeBy: none
+		sourceColumn: count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reliancemart_gold_web_logs = entity
+		mode: directLake
+		source
+			entityName: reliancemart_gold_web_logs
+			schemaName: dbo
+			expressionSource: 'DirectLake - Reliancemart_Gold'
+

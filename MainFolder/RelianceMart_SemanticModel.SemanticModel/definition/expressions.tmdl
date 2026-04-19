@@ -1,0 +1,9 @@
+expression 'DirectLake - Reliancemart_Gold' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/2a6c58fc-e653-4533-9bf0-26a8472d537a/e7d72935-a9b9-42b7-9079-92e47def4beb", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: c144b1ec-b587-40b7-9329-cc220b3cf53a
+
+	annotation PBI_IncludeFutureArtifacts = False
+

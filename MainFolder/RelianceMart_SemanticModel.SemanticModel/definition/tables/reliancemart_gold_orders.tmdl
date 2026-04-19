@@ -1,0 +1,278 @@
+table reliancemart_gold_orders
+	lineageTag: b3237d77-e2f5-4d1b-83d3-e12d4c5d25ba
+	sourceLineageTag: [dbo].[reliancemart_gold_orders]
+
+	measure 'Bar Index' = ```
+			
+			RANKX(
+			    ALL(reliancemart_gold_orders[ProductName]),  
+			    CALCULATE(SUM(reliancemart_gold_orders[TotalAmount])),
+			    ,
+			    ASC,
+			    DENSE
+			)
+			```
+		formatString: 0
+		lineageTag: 25e86168-a2c3-4d2d-aad8-89d0eb99b2e7
+
+		changedProperty = Name
+
+	measure 'Bar Color' =
+			
+			IF(
+			    MOD([Index], 2) = 0,
+			    "#7A9BD1",
+			    "#003183"
+			)
+		lineageTag: 283c0a41-e206-4d90-ab25-2842343f1517
+
+		changedProperty = Name
+
+	measure Index =
+			
+			RANKX(
+			    ALL(reliancemart_gold_orders[ProductName]),
+			    CALCULATE(SUM(reliancemart_gold_orders[TotalAmount])),
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: 104077df-9451-49e9-8d19-342ab6f40365
+
+		changedProperty = Name
+
+	measure 'Top 5 Products Total' = ```
+			
+			VAR TopProducts = 
+			    TOPN(
+			        5,
+			        ALL('reliancemart_gold_orders'[ProductName]),
+			        CALCULATE(SUM('reliancemart_gold_orders'[TotalAmount])),
+			        DESC
+			    )
+			RETURN
+			CALCULATE(
+			    SUM('reliancemart_gold_orders'[TotalAmount]),
+			    TopProducts
+			)
+			```
+		lineageTag: acca5af1-5755-4ea2-9acc-de9555159806
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales' = SUM('reliancemart_gold_orders'[TotalAmount])
+		lineageTag: 8b87ba20-7bb6-4f2c-ad30-1afaf5e78a2a
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Products Sold' = SUM(reliancemart_gold_orders[Quantity])
+		lineageTag: c5b67a92-e327-42db-a50d-5c09ae0234e5
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Orders' = DISTINCTCOUNT('reliancemart_gold_orders'[OrderID])
+		formatString: 0
+		lineageTag: 0b42f9ee-af70-45ac-813d-008dafe1f5ee
+
+		changedProperty = Name
+
+	measure 'Total Customers' = DISTINCTCOUNT('reliancemart_gold_orders'[CustomerID])
+		formatString: 0
+		lineageTag: 17b3c296-f3b9-42e8-9bd4-4629cfddd444
+
+		changedProperty = Name
+
+	measure 'Average Order Value(AOV)' = DIVIDE([Total Sales], [Total Orders])
+		lineageTag: 3b5307ad-bf41-463d-a5db-ed32fbcc59dd
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YoY Growth %' =
+			
+			DIVIDE(
+			    [Total Sales] - CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date Table'[Date])),
+			    CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date Table'[Date]))
+			)
+		lineageTag: 216cc0fa-7201-4e53-9449-0663a28d32c1
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProductID
+		dataType: string
+		lineageTag: 358aa8da-4496-41cf-ba36-5f82b90fe46b
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		lineageTag: 99501f46-4698-4d75-8508-5b0bb7837da6
+		sourceLineageTag: CustomerID
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: string
+		lineageTag: 8e3ac892-2a44-4af5-afad-67d57419ffdc
+		sourceLineageTag: OrderID
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1b92b5c7-f2fd-479b-813c-2a9792cf2fb0
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: double
+		lineageTag: 5fd012c8-89f6-402b-b4ad-fbe1eda7969a
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalAmount
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 185121e3-13d9-4af2-b7a6-cfafc99bec01
+		sourceLineageTag: TotalAmount
+		summarizeBy: sum
+		sourceColumn: TotalAmount
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: 413c8750-da60-4d3f-b98f-7d4e32ef0a31
+		sourceLineageTag: PaymentMethod
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		lineageTag: 68a3b44c-18b8-4f1c-beba-df928eee67e1
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 670c9bf6-ff4c-4eff-965b-bd25c4abc4f9
+		sourceLineageTag: Email
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 44268657-9e3d-4e24-b950-013cb280505b
+		sourceLineageTag: Location
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignupDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 18fba48f-f4a8-4ba8-bdb1-3eac29c11bca
+		sourceLineageTag: SignupDate
+		summarizeBy: none
+		sourceColumn: SignupDate
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: e0aa5210-b3b7-4f79-b4cc-49547c75c63e
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: fd5c2eee-02b7-4c27-bb7b-b0217c52372a
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stock
+		dataType: double
+		lineageTag: 033c439e-d182-487a-9c63-47009e59d846
+		sourceLineageTag: Stock
+		summarizeBy: sum
+		sourceColumn: Stock
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UnitPrice
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: efa85e69-8166-41b5-a1e8-d718af42e469
+		sourceLineageTag: UnitPrice
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition reliancemart_gold_orders = entity
+		mode: directLake
+		source
+			entityName: reliancemart_gold_orders
+			schemaName: dbo
+			expressionSource: 'DirectLake - Reliancemart_Gold'
+

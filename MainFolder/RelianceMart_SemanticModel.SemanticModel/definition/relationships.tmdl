@@ -1,0 +1,12 @@
+relationship dd30c5d0-469e-9b44-4350-44c561a30b7e
+	fromColumn: reliancemart_gold_orders.ProductID
+	toColumn: reliancemart_gold_reviews.product_id
+
+relationship c658a297-45fd-26d7-8516-3ee7f920c0bf
+	fromColumn: reliancemart_gold_orders.CustomerID
+	toColumn: reliancemart_gold_web_logs.user_id
+
+relationship 73410cba-ff09-07ae-851a-d8cefb64c910
+	fromColumn: reliancemart_gold_orders.OrderDate
+	toColumn: 'Date Table'.Date
+

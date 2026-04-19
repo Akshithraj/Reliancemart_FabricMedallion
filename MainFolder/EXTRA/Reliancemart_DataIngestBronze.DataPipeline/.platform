@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Reliancemart_DataIngestBronze"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ffb4b059-c631-a110-484c-fc080eddc639"
+  }
+}
