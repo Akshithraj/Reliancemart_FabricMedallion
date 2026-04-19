@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "Reliancemart_Silver"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "df15822a-3531-a95e-4307-79bcd5974284"
+  }
+}

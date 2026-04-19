@@ -1,0 +1,54 @@
+[
+  {
+    "name": "RelianceMart_Silver_Web_Logs",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/RelianceMart_Silver_Web_Logs",
+        "itemId": "df15822a-3531-a95e-4307-79bcd5974284",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "RelianceMart_Silver_Social_Media",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/RelianceMart_Silver_Social_Media",
+        "itemId": "df15822a-3531-a95e-4307-79bcd5974284",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "RelianceMart_Silver_Reviews",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/RelianceMart_Silver_Reviews",
+        "itemId": "df15822a-3531-a95e-4307-79bcd5974284",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "RelianceMart_Silver_Orders",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/RelianceMart_Silver_Orders",
+        "itemId": "df15822a-3531-a95e-4307-79bcd5974284",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  }
+]

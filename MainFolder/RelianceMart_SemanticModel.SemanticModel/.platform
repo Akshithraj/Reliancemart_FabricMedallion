@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "RelianceMart_SemanticModel"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "49a2f048-67ee-b1b7-4a9b-fb000e3dc011"
+  }
+}

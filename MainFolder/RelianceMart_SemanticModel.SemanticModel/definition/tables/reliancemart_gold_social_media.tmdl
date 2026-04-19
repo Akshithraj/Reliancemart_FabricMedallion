@@ -1,0 +1,70 @@
+table reliancemart_gold_social_media
+	lineageTag: 5b5a7ecc-e19a-410a-9050-90f571ef2e09
+	sourceLineageTag: [dbo].[reliancemart_gold_social_media]
+
+	measure Positive_Sentiment(%) =
+			
+			DIVIDE(
+			    CALCULATE(
+			        SUM(reliancemart_gold_social_media[count]),
+			        reliancemart_gold_social_media[sentiment] = "positive"
+			    ),
+			    SUM(reliancemart_gold_social_media[count])
+			)
+		lineageTag: 4a3ac712-10b3-44af-a6b4-1980c7540c1f
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Negative_Sentiment(%) =
+			
+			
+			DIVIDE(
+			    CALCULATE(
+			        SUM(reliancemart_gold_social_media[count]),
+			        reliancemart_gold_social_media[sentiment] = "negative"
+			    ),
+			    SUM(reliancemart_gold_social_media[count])
+			)
+		lineageTag: 9d0124a3-9109-4041-bb16-4b1209fea294
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column platform
+		dataType: string
+		lineageTag: 48a73311-c038-4ffa-a037-3ca0c5c06c5d
+		sourceLineageTag: platform
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: 3278e83b-f6aa-4760-8f7d-7091953833a9
+		sourceLineageTag: sentiment
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column count
+		dataType: int64
+		formatString: 0
+		lineageTag: 7012c57d-63c1-4837-a1e9-aecae3b41734
+		sourceLineageTag: count
+		summarizeBy: sum
+		sourceColumn: count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reliancemart_gold_social_media = entity
+		mode: directLake
+		source
+			entityName: reliancemart_gold_social_media
+			schemaName: dbo
+			expressionSource: 'DirectLake - Reliancemart_Gold'
+

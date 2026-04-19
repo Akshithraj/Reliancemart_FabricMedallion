@@ -1,0 +1,46 @@
+table reliancemart_gold_reviews
+	lineageTag: 41f5783e-f898-457e-8588-c2ebc9460e36
+	sourceLineageTag: [dbo].[reliancemart_gold_reviews]
+
+	measure 'High Rated %' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        COUNTROWS(reliancemart_gold_reviews),
+			        reliancemart_gold_reviews[AvgRating] >= 4
+			    ),
+			    COUNTROWS(reliancemart_gold_reviews)
+			)
+		lineageTag: d19d52fe-3dbe-41b6-9026-74dc56fec626
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_id
+		dataType: string
+		lineageTag: 8f9fc6e6-ce98-4772-9c64-31d2782a5e1c
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgRating
+		dataType: double
+		lineageTag: fd4a1856-4c13-44b5-9a6e-083b0af03bad
+		sourceLineageTag: AvgRating
+		summarizeBy: none
+		sourceColumn: AvgRating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition reliancemart_gold_reviews = entity
+		mode: directLake
+		source
+			entityName: reliancemart_gold_reviews
+			schemaName: dbo
+			expressionSource: 'DirectLake - Reliancemart_Gold'
+
