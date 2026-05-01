@@ -69,7 +69,8 @@ Tech Stack
 * Orchestration: Fabric Data Pipelines.
 
 * Visualization: Power BI (Direct Lake Mode).
-
-
+  
+* Lineage_Flow:
+ img width="2088" height="1271" alt="2592F93C-8900-46CC-B443-7ABD0782A40E_1_201_a" src="https://github.com/user-attachments/assets/a2a4500d-4d66-4eba-97e7-ebce21164887" />
 
 
